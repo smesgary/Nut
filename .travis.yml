@@ -63,7 +63,7 @@ install:
   - qmake -v
 
 before_script:
-  - export DISPLAY=:0    
+  - export DISPLAY=':0.0'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$CXX" != clang++ ]] || export QMAKESPEC=linux-clang'
   - '[[ "$TRAVIS_OS_NAME" != linux || "$CXX" != g++     ]] || export QMAKESPEC=linux-g++'
   - '[[ "$TRAVIS_OS_NAME" != osx   || "$CXX" != clang++ ]] || export QMAKESPEC=macx-clang'
@@ -75,5 +75,6 @@ before_script:
   - qmake -r -Wall -Wlogic -Wparser CONFIG+=debug_and_release "$TRAVIS_BUILD_DIR/nut.pro"
 
 script:
+  - export DISPLAY=':0.0'
   - make -C "$TRAVIS_BUILD_DIR-build" all
   - make -C "$TRAVIS_BUILD_DIR-build" -j2 check TESTARGS=-silent
